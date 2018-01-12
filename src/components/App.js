@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchPosts } from '../actions';
+import { fetchPosts, selectPost } from '../actions';
 
 const apiUrl = "http://localhost:3001";
 const headers = {"Authorization": "secret"};
@@ -29,10 +29,19 @@ class App extends Component {
         <li key={index}><Link to={category.name}>{category.name}</Link></li>))
     }
   }
+  selectPost(post) {
+    this.props.selectPost(post)
+  }
   renderAllPosts() {
     if (this.props.posts[0]) {
       return this.props.posts[0].map((post, index) => (
-        <li key={index}>{post.title}</li>
+        <li key={index}>
+          <table>
+            <tbody>
+            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to="/posts/:id">{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
+            </tbody>
+          </table>
+        </li>
       ))
     }
   }
@@ -53,12 +62,14 @@ class App extends Component {
 }
 const mapStateToProps = state => {
   return {
-    posts: state.posts
+    posts: state.posts,
+    selectedPost: state.selectedPost
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchPosts: (posts) => dispatch(fetchPosts(posts))
+  fetchPosts: (posts) => dispatch(fetchPosts(posts)),
+  selectPost: (post) => dispatch(selectPost(post))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
