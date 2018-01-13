@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route, BrowserRouter } from 'react-router-dom';
 
-import { fetchPosts, selectPost } from '../actions';
-
-const apiUrl = "http://localhost:3001";
-const headers = {"Authorization": "secret"};
+import * as API from '../utils/api';
+import { storePosts, selectPost } from '../actions';
+import PostItem from './PostItem';
 
 class App extends Component {
   state = {
@@ -13,15 +12,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${apiUrl}/categories`, { headers })
-      .then(res => res.json())
-      .then(({ categories }) => this.setState({ categories }))
-    fetch(`${apiUrl}/posts`, { headers })
-      .then(res => res.json())
-      .then(posts => (
-        this.props.fetchPosts(posts)
-
-      ))
+    API.getCategories().then(categories => this.setState({ categories }))
+    API.getAllPosts().then(posts => this.props.storePosts(posts))
   }
   renderCategories() {
     if (this.state.categories !== []) {
@@ -38,7 +30,7 @@ class App extends Component {
         <li key={index}>
           <table>
             <tbody>
-            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to="/posts/:id">{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
+            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
             </tbody>
           </table>
         </li>
@@ -68,7 +60,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchPosts: (posts) => dispatch(fetchPosts(posts)),
+  storePosts: (posts) => dispatch(storePosts(posts)),
   selectPost: (post) => dispatch(selectPost(post))
 })
 
