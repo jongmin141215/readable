@@ -5,9 +5,10 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PostItem from './components/PostItem';
 import PostList from './components/PostList';
+import PostForm from './components/PostForm';
 
 import rootReducer from './reducers';
 
@@ -17,9 +18,12 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route exact path="/" component={App} />
-        <Route path="/posts/:id" component={PostItem} />
-        <Route path="/react" component={PostList} />
+        <Switch>
+          <Route path="/posts/new" component={PostForm} />
+          <Route path="/posts/:id" component={PostItem} />
+          <Route path="/react" component={PostList} />
+          <Route path="/" component={App} />
+        </Switch>
       </div>
     </BrowserRouter>
   </Provider>,

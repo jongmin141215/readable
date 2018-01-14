@@ -16,3 +16,16 @@ export const getPost = (id) => {
     .then(res => res.json())
     .then(post => post)
 }
+export const addPost = (post) => {
+  console.log("JSON.stringify(post)", JSON.stringify(post))
+  fetch(`${apiUrl}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  }).then(res => {
+    console.log("res", res)
+    res.json()})
+}

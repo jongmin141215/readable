@@ -30,7 +30,7 @@ class App extends Component {
         <li key={index}>
           <table>
             <tbody>
-            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
+            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td><td>{JSON.stringify(post)}</td></tr>
             </tbody>
           </table>
         </li>
@@ -41,6 +41,7 @@ class App extends Component {
     console.log("PROPS", this.props.posts[0])
     return (
       <div>
+        <Link to="/posts/new">Create Post</Link>
         <h1>Categories</h1>
           <ul>
             {this.renderCategories()}
