@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, Route, BrowserRouter } from 'react-router-dom';
 
 import * as API from '../utils/api';
-import { storePosts, selectPost } from '../actions';
+import { fetchPosts, selectPost } from '../actions';
 import PostItem from './PostItem';
 
 class App extends Component {
@@ -13,12 +13,12 @@ class App extends Component {
 
   componentDidMount() {
     API.getCategories().then(categories => this.setState({ categories }))
-    API.getAllPosts().then(posts => this.props.storePosts(posts))
+    this.props.fetchPosts()
   }
   renderCategories() {
     if (this.state.categories !== []) {
       return this.state.categories.map((category, index) => (
-        <li key={index}><Link to={category.name}>{category.name}</Link></li>))
+        <li key={index}><Link to={category.name + "/posts"}>{category.name}</Link></li>))
     }
   }
   selectPost(post) {
@@ -60,9 +60,9 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  storePosts: (posts) => dispatch(storePosts(posts)),
-  selectPost: (post) => dispatch(selectPost(post))
-})
+// const mapDispatchToProps = dispatch => ({
+//   fetchPosts: (posts) => dispatch(fetchPosts(posts)),
+//   selectPost: (post) => dispatch(selectPost(post))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, { fetchPosts })(App);

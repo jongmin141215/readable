@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions';
 
 class PostList extends Component {
+  componentDidMound() {
+    // fetchPosts.
+  }
   render() {
     return (
       <div>
@@ -9,5 +14,8 @@ class PostList extends Component {
     );
   }
 }
+// const mapDispatchToProps = dispatch => ({
+//   fetchPostsByCategory:
+// })
 
 export default PostList;

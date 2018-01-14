@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import { STORE_POSTS, SELECT_POST, STORE_POST } from '../actions';
+import { RECEIVE_POSTS, SELECT_POST, FETCH_POST } from '../actions';
 
 function posts(state = [], action) {
   switch (action.type) {
-    case STORE_POSTS:
+    case RECEIVE_POSTS:
+    console.log("featchPosts called")
+    console.log("action.posts", action.posts)
       return [...state, action.posts];
     default:
       return state;
@@ -20,7 +22,7 @@ function selectedPost(state = {}, action) {
 }
 function post(state = {}, action) {
   switch (action.type) {
-    case STORE_POST:
+    case FETCH_POST:
       return action.post
     default:
      return state;

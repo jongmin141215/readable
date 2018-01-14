@@ -1,13 +1,19 @@
-export const STORE_POSTS = "STORE_POSTS";
-export const SELECT_POST = "SELECT_POST";
-export const STORE_POST = "STORE_POST";
+import * as API from '../utils/api';
 
-export const storePosts = (posts) => {
-  return {
-    type: STORE_POSTS,
-    posts
-  }
-}
+export const RECEIVE_POSTS = "RECEIVE_POSTS";
+export const SELECT_POST = "SELECT_POST";
+export const FETCH_POST = "FETCH_POST";
+
+
+
+export const fetchPosts = () => dispatch => (
+  API.getAllPosts().then(posts => dispatch(receivePosts(posts)))
+);
+
+export const receivePosts = posts => ({
+  type: RECEIVE_POSTS,
+  posts: posts.filter(post => post.category === "redux")
+});
 
 export const selectPost = (selectedPost) => {
   return {
@@ -16,9 +22,9 @@ export const selectPost = (selectedPost) => {
   }
 }
 
-export const storePost = (post) => {
+export const fetchPost = (post) => {
   return {
-    type: STORE_POST,
+    type: FETCH_POST,
     post
   }
 }

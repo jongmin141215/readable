@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import thunk from 'redux-thunk';
 import PostItem from './components/PostItem';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 console.log("store", store)
 ReactDOM.render(
   <Provider store={store}>
@@ -21,7 +22,8 @@ ReactDOM.render(
         <Switch>
           <Route path="/posts/new" component={PostForm} />
           <Route path="/posts/:id" component={PostItem} />
-          <Route path="/react" component={PostList} />
+          <Route path="/:category/posts" component={PostList} />
+
           <Route path="/" component={App} />
         </Switch>
       </div>

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as API from '../utils/api';
-import { storePost } from '../actions';
+import { fetchPost } from '../actions';
 
 class PostItem extends Component {
   componentDidMount() {
     API.getPost(this.props.match.params.id)
       .then(post => {
         console.log("POST", post)
-        this.props.storePost(post)})
+        this.props.fetchPost(post)})
   }
   render() {
     console.log("post item prop", this.props.post)
@@ -35,6 +35,6 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  storePost: (post) => dispatch(storePost(post))
+  fetchPost: (post) => dispatch(fetchPost(post))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PostItem);

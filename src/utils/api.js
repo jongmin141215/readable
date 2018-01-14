@@ -6,11 +6,11 @@ export const getCategories = () => {
     .then(res => res.json())
     .then(({ categories }) => categories)
 }
-export const getAllPosts = () => {
-  return fetch(`${apiUrl}/posts`, { headers })
+export const getAllPosts = () => (
+  fetch(`${apiUrl}/posts`, { headers })
     .then(res => res.json())
     .then(posts => posts)
-}
+)
 export const getPost = (id) => {
   return fetch(`${apiUrl}/posts/${id}`, { headers })
     .then(res => res.json())
