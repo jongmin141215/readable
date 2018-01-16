@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import * as API from '../utils/api';
 const uuidv4 = require('uuid/v4');
 
@@ -7,7 +8,8 @@ class PostForm extends Component {
     title: "",
     author: "",
     body: "",
-    category: ""
+    category: "",
+    fireRedirect: false
   }
   updateTitle(title) {
     this.setState({ title })
@@ -32,6 +34,7 @@ class PostForm extends Component {
       id: uuidv4()
     }
     API.addPost(post)
+    this.setState({ fireRedirect: true })
   }
   render() {
     return(
@@ -50,6 +53,7 @@ class PostForm extends Component {
         <label>Body</label>
         <textarea value={this.state.body} onChange={event => this.updateBody(event.target.value)}></textarea>
         <button type="submit">Submit</button>
+        { this.state.fireRedirect && <Redirect to="/" />}
       </form>
     );
   }

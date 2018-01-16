@@ -14,7 +14,7 @@ class PostList extends Component {
         <li key={index}>
           <table>
             <tbody>
-            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td><td>{JSON.stringify(post)}</td></tr>
+            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
             </tbody>
           </table>
         </li>
