@@ -6,7 +6,8 @@ function posts(state = [], action) {
     case RECEIVE_POSTS:
     console.log("featchPosts called")
     console.log("action.posts", action.posts)
-      return [...state, action.posts];
+    console.log("new state", [...state, action.posts])
+      return action.posts;
     default:
       return state;
   }

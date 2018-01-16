@@ -5,15 +5,18 @@ export const SELECT_POST = "SELECT_POST";
 export const FETCH_POST = "FETCH_POST";
 
 
-
 export const fetchPosts = () => dispatch => (
   API.getAllPosts().then(posts => dispatch(receivePosts(posts)))
 );
 
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
-  posts: posts.filter(post => post.category === "redux")
+  posts
 });
+
+export const fetchPostsByCategory = category => dispatch => (
+  API.getPostsByCategory(category).then(posts => dispatch(receivePosts(posts)))
+);
 
 export const selectPost = (selectedPost) => {
   return {

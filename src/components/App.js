@@ -25,8 +25,8 @@ class App extends Component {
     this.props.selectPost(post)
   }
   renderAllPosts() {
-    if (this.props.posts[0]) {
-      return this.props.posts[0].map((post, index) => (
+    if (this.props.posts) {
+      return this.props.posts.map((post, index) => (
         <li key={index}>
           <table>
             <tbody>

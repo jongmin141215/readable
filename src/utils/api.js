@@ -11,6 +11,11 @@ export const getAllPosts = () => (
     .then(res => res.json())
     .then(posts => posts)
 )
+export const getPostsByCategory = (category) => (
+  fetch(`${apiUrl}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(posts => posts)
+)
 export const getPost = (id) => {
   return fetch(`${apiUrl}/posts/${id}`, { headers })
     .then(res => res.json())
