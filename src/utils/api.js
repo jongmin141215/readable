@@ -34,3 +34,8 @@ export const addPost = (post) => {
     console.log("res", res)
     res.json()})
 }
+export const getComments = (postId) => {
+  return fetch(`${apiUrl}/posts/${postId}/comments`, { headers })
+    .then(res => res.json())
+    .then(comments => comments)
+}

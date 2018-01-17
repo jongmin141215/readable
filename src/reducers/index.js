@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_POSTS, SELECT_POST, FETCH_POST } from '../actions';
+import { RECEIVE_POSTS, SELECT_POST, RECEIVE_POST, RECEIVE_COMMENTS } from '../actions';
 
 function posts(state = [], action) {
   switch (action.type) {
@@ -23,15 +23,26 @@ function selectedPost(state = {}, action) {
 }
 function post(state = {}, action) {
   switch (action.type) {
-    case FETCH_POST:
+    case RECEIVE_POST:
+      console.log("RECEIVE POST", action.post)
       return action.post
     default:
      return state;
+  }
+}
+function comments(state = [], action) {
+  switch (action.type) {
+    case RECEIVE_COMMENTS:
+      console.log("RECEIVE COMMENTS", action.comments)
+      return action.comments;
+    default:
+      return state;
   }
 }
 
 export default combineReducers({
   posts,
   selectedPost,
-  post
+  post,
+  comments
 });
