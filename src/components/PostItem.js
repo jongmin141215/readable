@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as API from '../utils/api';
 import { fetchPost, fetchComments } from '../actions';
+import CommentForm from './CommentForm';
 
 class PostItem extends Component {
-
+  state = {
+    commentFormIsOpen: false
+  }
   componentDidMount() {
     // console.log("id", this.props.)
     this.props.fetchPost(this.props.match.params.id)
@@ -33,6 +37,8 @@ class PostItem extends Component {
             </tr>
             <tr><td></td><td>{post.author}</td><td>{post.timestamp}</td></tr>
             <tr><td></td><td>{post.body}</td></tr>
+            <tr><td><button onClick={() => this.setState({commentFormIsOpen: true})}>Add Comment</button></td></tr>
+            {this.state.commentFormIsOpen && <CommentForm />}
             {this.renderComments()}
           </tbody>
         </table>
