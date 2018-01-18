@@ -19,11 +19,19 @@ class PostItem extends Component {
   renderComments() {
     const { comments } = this.props;
     if (comments) {
-      return comments.map(comment => {
-        return <tr key={comment.id}><td>{comment.body}</td><td>{comment.author}</td></tr>
+      return comments.map((comment, index) => {
+        return (
+          <li key={index}>
+            <p>{comment.body} - {comment.author}</p>
+          </li>
+        )
       })
     }
 
+  }
+  handleCommentSubmission() {
+    this.setState({ commentFormIsOpen: false });
+    this.props.fetchComments(this.props.match.params.id)
   }
   render() {
     console.log("post item prop", this.props)
@@ -38,10 +46,13 @@ class PostItem extends Component {
             <tr><td></td><td>{post.author}</td><td>{post.timestamp}</td></tr>
             <tr><td></td><td>{post.body}</td></tr>
             <tr><td><button onClick={() => this.setState({commentFormIsOpen: true})}>Add Comment</button></td></tr>
-            {this.state.commentFormIsOpen && <CommentForm />}
-            {this.renderComments()}
           </tbody>
         </table>
+
+        {this.state.commentFormIsOpen && <CommentForm postId={this.props.match.params.id} handleCommentSubmission={() => this.handleCommentSubmission()} />}
+        <ul>
+          {this.renderComments()}
+        </ul>
       </div>
     );
   }
