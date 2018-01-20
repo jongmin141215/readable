@@ -11,8 +11,11 @@ class PostItem extends Component {
   state = {
     commentFormIsOpen: false,
     editModeIsOn: false,
+    commentEditModeIsOn: false,
     title: "",
-    body: ""
+    body: "",
+    commentBody: "",
+    selectedCommentId: ""
   }
   componentDidMount() {
     // console.log("id", this.props.)
@@ -31,13 +34,39 @@ class PostItem extends Component {
   updateBody(body) {
     this.setState({ body })
   }
+  updateCommentBody(commentBody) {
+    this.setState({ commentBody })
+  }
+  editComment(comment) {
+    this.setState({
+      commentEditModeIsOn: true,
+      selectedCommentId: comment.id,
+      commentBody: comment.body
+    })
+  }
+  updateComment(event) {
+    event.preventDefault();
+    let comment = {
+      timestamp: Date.now(),
+      body: this.state.commentBody
+    }
+    API.updateComment(this.state.selectedCommentId, comment)
+    this.setState({commentEditModeIsOn: false, selectedCommentId: ""})
+    this.props.fetchComments(this.props.match.params.id)
+  }
   renderComments() {
     const { comments } = this.props;
     if (comments) {
-      return comments.map((comment, index) => {
+      return comments.map(comment => {
         return (
-          <li key={index}>
-            <p>{comment.body} - {comment.author}</p>
+          <li key={comment.id}>
+            {(this.state.selectedCommentId == "" || this.state.selectedCommentId != comment.id) && <p>{comment.body} - {comment.author} <button onClick={() => this.editComment(comment)}>Edit Comment</button></p>}
+            {this.state.commentEditModeIsOn && this.state.selectedCommentId == comment.id &&
+              <form onSubmit={event => this.updateComment(event)}>
+                <input type="text" value={this.state.commentBody} onChange={event => this.updateCommentBody(event.target.value)}/>
+                <button type="submit">Update Comment</button>
+              </form>
+            }
           </li>
         )
       })
@@ -53,7 +82,7 @@ class PostItem extends Component {
       title: this.state.title,
       body: this.state.body
     }
-    API.editPost(this.props.match.params.id, post)
+    API.updatePost(this.props.match.params.id, post)
     this.setState({editModeIsOn: false })
     this.props.fetchPost(this.props.match.params.id)
   }
