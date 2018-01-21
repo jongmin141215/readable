@@ -9,3 +9,26 @@ body {
 .post-margin {
   margin: 10px 20px;
 }
+.category-list {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  /* -webkit-padding-start: 0; */
+  margin-left: -40px;
+}
+.list-item-link {
+  text-decoration: none;
+}
+.post-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}
+.post-item-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-around;
+}
+.post-item-link span {
+
+}

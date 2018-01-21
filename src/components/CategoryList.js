@@ -12,8 +12,8 @@ class CategoryList extends Component {
     if (categories) {
       return categories.map(category => {
         return (
-          <li key={category.name}>
-            <Link to={category.name + "/posts"}>{category.name}</Link>
+          <li key={category.name} className="list-item">
+            <Link className="list-item-link" to={category.name + "/posts"}>{category.name}</Link>
           </li>
         )
       })
@@ -21,7 +21,7 @@ class CategoryList extends Component {
   }
   render() {
     return (
-      <ul>
+      <ul className="category-list">
         {this.renderCategories()}
       </ul>
     );

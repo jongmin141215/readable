@@ -12,8 +12,8 @@ class PostList extends Component {
     if (posts) {
       return posts.map(post => {
         return (
-          <li key={post.id}>
-            <Link to={"/posts/" + post.id}>
+          <li key={post.id} className="post-item">
+            <Link to={"/posts/" + post.id} className="post-item-link">
             <span>{post.category}</span><span>{post.title}</span><span>{post.commentCount}</span><span>{post.voteScore}</span><span>{post.timestamp}</span>
             </Link>
           </li>
@@ -24,7 +24,7 @@ class PostList extends Component {
   render() {
     console.log("PostList posts", this.props.posts)
     return (
-      <ul>
+      <ul className="post-list">
         {this.renderPosts()}
       </ul>
     );
