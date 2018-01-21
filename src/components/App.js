@@ -5,21 +5,11 @@ import { Link, Route, BrowserRouter } from 'react-router-dom';
 import * as API from '../utils/api';
 import { fetchPosts, selectPost } from '../actions';
 import PostItem from './PostItem';
+import CategoryList from './CategoryList';
 
 class App extends Component {
-  state = {
-    categories: []
-  }
-
   componentDidMount() {
-    API.getCategories().then(categories => this.setState({ categories }))
     this.props.fetchPosts()
-  }
-  renderCategories() {
-    if (this.state.categories !== []) {
-      return this.state.categories.map((category, index) => (
-        <li key={index}><Link to={category.name + "/posts"}>{category.name}</Link></li>))
-    }
   }
   selectPost(post) {
     this.props.selectPost(post)
@@ -43,9 +33,7 @@ class App extends Component {
       <div>
         <Link to="/posts/new">Create Post</Link>
         <h1>Categories</h1>
-          <ul>
-            {this.renderCategories()}
-          </ul>
+          <CategoryList />
           <ul>
             {this.renderAllPosts()}
           </ul>
