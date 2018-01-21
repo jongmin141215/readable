@@ -1,36 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPostsByCategory } from '../actions';
+import { fetchPosts } from '../actions';
 
 class PostList extends Component {
   componentDidMount() {
-    this.props.fetchPostsByCategory(this.props.match.params.category)
-    console.log("in post list", this.props.posts)
+    this.props.fetchPosts();
   }
   renderPosts() {
-    if (this.props.posts) {
-      return this.props.posts.map((post, index) => (
-        <li key={index}>
-          <table>
-            <tbody>
-            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
-            </tbody>
-          </table>
-        </li>
-      ))
+    const { posts } = this.props;
+    if (posts) {
+      return posts.map(post => {
+        return (
+          <li key={post.id}>
+            <Link to={"/posts/" + post.id}>
+            <span>{post.category}</span><span>{post.title}</span><span>{post.commentCount}</span><span>{post.voteScore}</span><span>{post.timestamp}</span>
+            </Link>
+          </li>
+        )
+      })
     }
   }
   render() {
+    console.log("PostList posts", this.props.posts)
     return (
-      <div>
-      Post List
-      {this.renderPosts()}
-      </div>
+      <ul>
+        {this.renderPosts()}
+      </ul>
     );
   }
 }
-const mapStateToProps = state => ({
-  posts: state.posts
-})
-export default connect(mapStateToProps, { fetchPostsByCategory })(PostList);
+const mapStateToProps = state => {
+  return {
+    posts: state.posts
+  }
+}
+export default connect(mapStateToProps, { fetchPosts })(PostList);
