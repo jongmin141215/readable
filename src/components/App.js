@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import PostItem from './PostItem';
+import PostItemDetail from './PostItemDetail';
 import CategoryList from './CategoryList';
 import PostList from './PostList';
 

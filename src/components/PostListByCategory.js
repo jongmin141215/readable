@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPostsByCategory } from '../actions';
+import PostItem from './PostItem';
 
 class PostListByCategory extends Component {
   componentDidMount() {
@@ -9,24 +10,18 @@ class PostListByCategory extends Component {
     console.log("in post list", this.props.posts)
   }
   renderPosts() {
-    if (this.props.posts) {
-      return this.props.posts.map((post, index) => (
-        <li key={index}>
-          <table>
-            <tbody>
-            <tr><th>{post.category}</th><td><Link onClick={() => this.selectPost(post)} to={"/posts/" + post.id}>{post.title}</Link></td><td>{post.author}</td><td>{post.commentCount}</td><td>{post.voteScore}</td></tr>
-            </tbody>
-          </table>
-        </li>
-      ))
+    const { posts } = this.props;
+    if (posts) {
+      return posts.map((post) => {
+        return <PostItem post={post} />;
+      })
     }
   }
   render() {
     return (
-      <div>
-      Post List
-      {this.renderPosts()}
-      </div>
+      <ul className="post-list">
+        {this.renderPosts()}
+      </ul>
     );
   }
 }
