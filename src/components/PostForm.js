@@ -5,10 +5,10 @@ const uuidv4 = require('uuid/v4');
 
 class PostForm extends Component {
   state = {
-    title: "",
-    author: "",
-    body: "",
-    category: "",
+    title: this.props.title || "",
+    author: this.props.author || "",
+    body: this.props.body || "",
+    category: this.props.category || "",
     fireRedirect: false
   }
   updateTitle(title) {
@@ -25,31 +25,46 @@ class PostForm extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    let post = {
-      timestamp: Date.now(),
-      title: this.state.title,
-      body: this.state.body,
-      author: this.state.author,
-      category: this.state.category,
-      id: uuidv4()
+    if (this.props.mode == "Edit") {
+      let post = {
+        title: this.state.title,
+        body: this.state.body
+      }
+      API.updatePost(this.props.postId, post)
+      this.props.handleSubmit()
+    } else {
+      let post = {
+        timestamp: Date.now(),
+        title: this.state.title,
+        body: this.state.body,
+        author: this.state.author,
+        category: this.state.category,
+        id: uuidv4()
+      }
+      API.addPost(post)
+      this.setState({ fireRedirect: true })
     }
-    API.addPost(post)
-    this.setState({ fireRedirect: true })
   }
   render() {
+    const editMode = this.props.mode == "Edit" ? true : false;
+    console.log("editMode", editMode)
     return(
       <form onSubmit={(event) => this.handleSubmit(event)}>
         <label>Category</label>
-        <select onChange={event => this.updateCategory(event.target.value)} value={this.state.value}>
+        <select onChange={event => this.updateCategory(event.target.value)} value={this.state.value}
+          defaultValue={this.state.category}
+          disabled={editMode}>
           <option>Choose</option>
-          <option value="react">React</option>
-          <option value="redux">Redux</option>
-          <option value="udacity">Udacity</option>
+          <option value="react" >React</option>
+          <option value="redux" >Redux</option>
+          <option value="udacity" >Udacity</option>
         </select>
         <label>Title</label>
         <input type="text" value={this.state.title} onChange={event => this.updateTitle(event.target.value)} />
         <label>Author</label>
-        <input type="text" value={this.state.author} onChange={event => this.updateAuthor(event.target.value)}/>
+        <input type="text" value={this.state.author}
+          onChange={event => this.updateAuthor(event.target.value)}
+          disabled={editMode} />
         <label>Body</label>
         <textarea value={this.state.body} onChange={event => this.updateBody(event.target.value)}></textarea>
         <button type="submit">Submit</button>

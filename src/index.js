@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import PostItemDetail from './components/PostItemDetail';
+import PostItemPage from './components/PostItemPage';
 import PostListByCategory from './components/PostListByCategory';
 import PostForm from './components/PostForm';
 
@@ -21,7 +21,7 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/posts/new" component={PostForm} />
-          <Route path="/posts/:id" component={PostItemDetail} />
+          <Route path="/posts/:id" component={PostItemPage} />
           <Route path="/:category/posts" component={PostListByCategory} />
 
           <Route path="/" component={App} />
