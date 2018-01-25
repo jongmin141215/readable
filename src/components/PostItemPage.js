@@ -16,7 +16,6 @@ class PostItemPage extends Component {
     commentEditModeIsOn: false,
     title: "",
     body: "",
-    commentBody: "",
     selectedCommentId: ""
   }
   componentDidMount() {
@@ -34,9 +33,6 @@ class PostItemPage extends Component {
   updateBody(body) {
     this.setState({ body })
   }
-  updateCommentBody(commentBody) {
-    this.setState({ commentBody })
-  }
   editComment(comment) {
     this.setState({
       commentEditModeIsOn: true,
@@ -45,36 +41,33 @@ class PostItemPage extends Component {
     })
   }
   updateComment(event) {
-    event.preventDefault();
-    let comment = {
-      timestamp: Date.now(),
-      body: this.state.commentBody
-    }
-    API.updateComment(this.state.selectedCommentId, comment)
     this.setState({commentEditModeIsOn: false, selectedCommentId: ""})
     this.props.fetchComments(this.props.match.params.id)
   }
   renderComments() {
     const { comments } = this.props;
+    const { selectedCommentId, commentEditModeIsOn, commentBody } = this.state;
 
     if (comments) {
       return comments.map(comment => {
         return (
-          // <CommentItem />
           <li key={comment.id}>
-            {(this.state.selectedCommentId == "" || this.state.selectedCommentId != comment.id) && <p>{comment.body} - {comment.author} <button onClick={() => this.editComment(comment)}>Edit Comment</button></p>}
-            {this.state.commentEditModeIsOn && this.state.selectedCommentId == comment.id &&
-              <form onSubmit={event => this.updateComment(event)}>
-                <input type="text" value={this.state.commentBody} onChange={event => this.updateCommentBody(event.target.value)}/>
-                <button type="submit">Update Comment</button>
-              </form>
+            {(selectedCommentId == "" || selectedCommentId != comment.id) &&
+              <CommentItem comment={comment}
+                editComment={() => this.editComment(comment)} />}
+            {commentEditModeIsOn && selectedCommentId == comment.id &&
+              <CommentForm mode="Edit"
+                body={comment.body}
+                commentId={comment.id}
+                author={comment.author}
+                updateComment={() => this.updateComment()} />
             }
           </li>
         )
       })
     }
   }
-  handleCommentSubmission() {
+  handleCommentSubmit() {
     this.setState({ commentFormIsOpen: false });
     this.props.fetchComments(this.props.match.params.id)
   }
@@ -83,7 +76,8 @@ class PostItemPage extends Component {
     this.props.fetchPost(this.props.match.params.id)
   }
   renderPost(post) {
-    if (!this.state.editModeIsOn) {
+    const { editModeIsOn, title, author, body, category } = this.state;
+    if (!editModeIsOn) {
       return (
         <div>
           <PostItemDetail post={post}/>
@@ -91,16 +85,15 @@ class PostItemPage extends Component {
         </div>
       )
     } else {
-
       return (
         <div>
-          <PostForm title={this.state.title}
-            author={this.state.author}
-            body={this.state.body}
-            category={this.state.category}
-            mode="Edit"
+          <PostForm mode="Edit"
+            title={title}
+            author={author}
+            body={body}
+            category={category}
             postId={post.id}
-            handleSubmit ={() => this.handleSubmit()}/>
+            handleSubmit ={() => this.handleSubmit()} />
         </div>
       )
     }
@@ -112,7 +105,7 @@ class PostItemPage extends Component {
       <div>
         {this.renderPost(post)}
         <button onClick={() => this.setState({commentFormIsOpen: true})}>Add Comment</button>
-        {this.state.commentFormIsOpen && <CommentForm postId={this.props.match.params.id} handleCommentSubmission={() => this.handleCommentSubmission()} />}
+        {this.state.commentFormIsOpen && <CommentForm postId={this.props.match.params.id} handleCommentSubmit={() => this.handleCommentSubmit()} />}
         <ul>
           {this.renderComments()}
         </ul>
