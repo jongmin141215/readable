@@ -79,3 +79,9 @@ export const updateComment = (commentId, comment) => {
   })
     .then(res => res.json())
 }
+export const deleteComment = (commentId) => {
+  return fetch(`${apiUrl}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers
+  })
+}

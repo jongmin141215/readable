@@ -16,7 +16,8 @@ class PostItemPage extends Component {
     commentEditModeIsOn: false,
     title: "",
     body: "",
-    selectedCommentId: ""
+    selectedCommentId: "",
+    commentDeleted: false
   }
   componentDidMount() {
     this.props.fetchPost(this.props.match.params.id).then(({post}) => this.setState({
@@ -41,8 +42,16 @@ class PostItemPage extends Component {
     })
   }
   updateComment(event) {
-    this.setState({commentEditModeIsOn: false, selectedCommentId: ""})
-    this.props.fetchComments(this.props.match.params.id)
+    this.props.fetchComments(this.props.match.params.id).then(
+      () => this.setState({commentEditModeIsOn: false, selectedCommentId: ""})
+    )
+  }
+  deleteComment(commentId) {
+    console.log("STATE", this.state)
+    API.deleteComment(commentId).then(() => {
+      this.props.fetchComments(this.props.match.params.id)
+      this.setState({commentDeleted: true})
+    })
   }
   renderComments() {
     const { comments } = this.props;
@@ -54,7 +63,8 @@ class PostItemPage extends Component {
           <li key={comment.id}>
             {(selectedCommentId == "" || selectedCommentId != comment.id) &&
               <CommentItem comment={comment}
-                editComment={() => this.editComment(comment)} />}
+                editComment={() => this.editComment(comment)}
+                deleteComment={(commentId) => this.deleteComment(commentId)} />}
             {commentEditModeIsOn && selectedCommentId == comment.id &&
               <CommentForm mode="Edit"
                 body={comment.body}

@@ -19,8 +19,8 @@ class CommentForm extends Component {
         timestamp: Date.now(),
         body
       }
-      API.updateComment(commentId, comment)
-      updateComment()
+      API.updateComment(commentId, comment);
+      updateComment();
     } else {
       let comment = {
         timestamp: Date.now(),
