@@ -8,6 +8,7 @@ import CommentForm from './CommentForm';
 import PostForm from './PostForm';
 import CommentItem from './CommentItem';
 import PostItemDetail from './PostItemDetail';
+import Vote from './Vote';
 
 class PostItemPage extends Component {
   state = {
@@ -91,6 +92,7 @@ class PostItemPage extends Component {
       return (
         <div>
           <PostItemDetail post={post}/>
+          <Vote id={post.id} />
           <button onClick={() => this.setState({editModeIsOn: true})}>Edit Post</button>
         </div>
       )

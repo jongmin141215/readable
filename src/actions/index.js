@@ -62,5 +62,6 @@ export const vote = (id, vote, match) => dispatch => (
     } else {
       dispatch(fetchPosts())
     }
+    dispatch(fetchPost(id))
   })
 )
