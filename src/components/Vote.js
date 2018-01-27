@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as API from '../utils/api';
+import { vote } from '../actions';
 
 class Vote extends Component {
   vote(value) {
-    console.log(value)
+    const { id, match } = this.props;
     let vote = {
       option: value
     }
-    API.votePost(this.props.postId, vote)
+    this.props.vote(id, vote, match);
   }
   render() {
     return (
@@ -18,4 +20,4 @@ class Vote extends Component {
     );
   }
 }
-export default Vote;
+export default connect(null, { vote })(Vote);

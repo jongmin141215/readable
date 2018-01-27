@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import PostItemPage from './components/PostItemPage';
-import PostListByCategory from './components/PostListByCategory';
+import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 
 import rootReducer from './reducers';
@@ -22,7 +22,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/posts/new" component={PostForm} />
           <Route path="/posts/:id" component={PostItemPage} />
-          <Route path="/:category/posts" component={PostListByCategory} />
+          <Route path="/:category/posts" component={PostList} />
 
           <Route path="/" component={App} />
         </Switch>

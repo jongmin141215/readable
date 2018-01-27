@@ -5,21 +5,20 @@ export const SELECT_POST = "SELECT_POST";
 export const RECEIVE_POST = "RECEIVE_POST";
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
+export const VOTE_POST = "VOTE_POST";
 
-
-
-export const fetchPosts = () => dispatch => (
-  API.getAllPosts().then(posts => dispatch(receivePosts(posts)))
-);
+export const fetchPosts = (category) => dispatch => {
+  if (category) {
+    return API.getPostsByCategory(category).then(posts => dispatch(receivePosts(posts)))
+  } else {
+    return API.getAllPosts().then(posts => dispatch(receivePosts(posts)))
+  }
+}
 
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
 });
-
-export const fetchPostsByCategory = category => dispatch => (
-  API.getPostsByCategory(category).then(posts => dispatch(receivePosts(posts)))
-);
 
 export const selectPost = (selectedPost) => {
   return {
@@ -56,3 +55,12 @@ export const receiveComments = comments => {
     comments
   }
 }
+export const vote = (id, vote, match) => dispatch => (
+  API.votePost(id, vote).then(() => {
+    if (match) {
+      dispatch(fetchPosts(match.params.category));
+    } else {
+      dispatch(fetchPosts())
+    }
+  })
+)

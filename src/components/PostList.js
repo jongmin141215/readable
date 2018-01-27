@@ -6,18 +6,22 @@ import PostItem from './PostItem';
 
 class PostList extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
+    if (this.props.match) {
+      console.log(this.props.match)
+      this.props.fetchPosts(this.props.match.params.category)
+    } else {
+      this.props.fetchPosts();
+    }
   }
   renderPosts() {
     const { posts } = this.props;
     if (posts) {
       return posts.map(post => {
-        return <PostItem post={post} key={post.id} />;
+        return <PostItem post={post} key={post.id} match={this.props.match} />;
       })
     }
   }
   render() {
-    console.log("PostList posts", this.props.posts)
     return (
       <ul className="post-list">
         {this.renderPosts()}
