@@ -6,6 +6,7 @@ export const RECEIVE_POST = "RECEIVE_POST";
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
 export const VOTE_POST = "VOTE_POST";
+export const SORT = "SORT";
 
 export const fetchPosts = (category) => dispatch => {
   if (category) {
@@ -69,5 +70,12 @@ export const vote = (id, vote, match) => dispatch => {
       }
       dispatch(fetchPost(id))
     })
+  }
+}
+export const sort = (sortBy, order) => {
+  return {
+    type: SORT,
+    sortBy,
+    order
   }
 }

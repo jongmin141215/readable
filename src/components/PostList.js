@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions';
 import PostItem from './PostItem';
+import Sort from './Sort';
 
 class PostList extends Component {
   componentDidMount() {
     if (this.props.match) {
-      console.log(this.props.match)
       this.props.fetchPosts(this.props.match.params.category)
     } else {
       this.props.fetchPosts();
@@ -23,9 +22,12 @@ class PostList extends Component {
   }
   render() {
     return (
-      <ul className="post-list">
-        {this.renderPosts()}
-      </ul>
+      <div>
+        <Sort />
+        <ul className="post-list">
+          {this.renderPosts()}
+        </ul>
+      </div>
     );
   }
 }

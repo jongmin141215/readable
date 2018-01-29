@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import * as API from '../utils/api';
 import { fetchPost, fetchComments } from '../actions';
@@ -62,11 +61,11 @@ class PostItemPage extends Component {
       return comments.map(comment => {
         return (
           <li key={comment.id}>
-            {(selectedCommentId == "" || selectedCommentId != comment.id) &&
+            {(selectedCommentId === "" || selectedCommentId !== comment.id) &&
               <CommentItem comment={comment}
                 editComment={() => this.editComment(comment)}
                 deleteComment={(commentId) => this.deleteComment(commentId)} />}
-            {commentEditModeIsOn && selectedCommentId == comment.id &&
+            {commentEditModeIsOn && selectedCommentId === comment.id &&
               <CommentForm mode="Edit"
                 body={comment.body}
                 commentId={comment.id}

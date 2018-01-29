@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_POSTS, SELECT_POST, RECEIVE_POST, RECEIVE_COMMENTS, RECEIVE_CATEGORIES } from '../actions';
+import { RECEIVE_POSTS, SELECT_POST, RECEIVE_POST, RECEIVE_COMMENTS, RECEIVE_CATEGORIES, SORT } from '../actions';
 
 function posts(state = [], action) {
   switch (action.type) {
@@ -8,6 +8,13 @@ function posts(state = [], action) {
     console.log("action.posts", action.posts)
     console.log("new state", [...state, action.posts])
       return action.posts;
+    case SORT:
+      if (action.order === "desc") {
+        return [...state].sort((b,a) => a[action.sortBy] - b[action.sortBy]);
+      } else {
+        return [...state].sort((a,b) => a[action.sortBy] - b[action.sortBy]);
+      }
+
     default:
       return state;
   }

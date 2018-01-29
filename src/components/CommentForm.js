@@ -14,7 +14,7 @@ class CommentForm extends Component {
     const { mode, commentId, postId, updateComment, handleCommentSubmit } = this.props;
     const { body, author } = this.state;
     event.preventDefault();
-    if (mode == "Edit") {
+    if (mode === "Edit") {
       let comment = {
         timestamp: Date.now(),
         body
@@ -35,7 +35,7 @@ class CommentForm extends Component {
   }
   render() {
     const { body, author } = this.state;
-    const editMode = this.props.mode == "Edit" ? true : false;
+    const editMode = this.props.mode === "Edit" ? true : false;
 
     return (
       <form onSubmit={(event) => this.handleSubmit(event)}>

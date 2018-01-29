@@ -20,7 +20,7 @@ class PostForm extends Component {
     const { title, body, author, category } = this.state;
     const { mode, postId, handleSubmit } = this.props;
     event.preventDefault();
-    if (mode == "Edit") {
+    if (mode === "Edit") {
       let post = {
         title,
         body
@@ -42,8 +42,8 @@ class PostForm extends Component {
   }
   render() {
     const { category, title, author, body, fireRedirect } = this.state;
-    const editMode = this.props.mode == "Edit" ? true : false;
-    
+    const editMode = this.props.mode === "Edit" ? true : false;
+
     return(
       <form onSubmit={(event) => this.handleSubmit(event)}>
         <label>Category</label>

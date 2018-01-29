@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import * as API from '../utils/api';
 import Vote from './Vote';
 
 class CommentItem extends Component {
   deleteComment(commentId) {
-
     this.props.deleteComment(commentId)
-
   }
   render() {
     const { comment, editComment } = this.props;

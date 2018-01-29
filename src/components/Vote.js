@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as API from '../utils/api';
 import { vote } from '../actions';
 
 class Vote extends Component {
