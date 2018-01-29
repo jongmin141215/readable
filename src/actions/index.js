@@ -56,7 +56,7 @@ export const receiveComments = comments => {
   }
 }
 export const vote = (id, vote, match) => dispatch => {
-  if (match.parentId) {
+  if (match && match.parentId) {
     console.log("comment vote")
     return API.voteComment(id, vote).then(() => dispatch(fetchComments(match.parentId)))
   } else {
