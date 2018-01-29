@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import * as API from '../utils/api';
+import Vote from './Vote';
 
 class CommentItem extends Component {
   deleteComment(commentId) {
 
     this.props.deleteComment(commentId)
-    console.log("hihihihihihihihihi")
+
   }
   render() {
     const { comment, editComment } = this.props;
@@ -14,6 +15,8 @@ class CommentItem extends Component {
         <span>{comment.body}</span>
         <span className="author">{comment.author}</span>
         <span>{comment.timestamp}</span>
+        <span style={{"color": "red"}}>{comment.voteScore}</span>
+        <Vote id={comment.id} match={this.props.comment}/>
         <button onClick={() => editComment()}>Edit Comment</button>
         <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
       </div>

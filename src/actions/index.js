@@ -55,13 +55,19 @@ export const receiveComments = comments => {
     comments
   }
 }
-export const vote = (id, vote, match) => dispatch => (
-  API.votePost(id, vote).then(() => {
-    if (match) {
-      dispatch(fetchPosts(match.params.category));
-    } else {
-      dispatch(fetchPosts())
-    }
-    dispatch(fetchPost(id))
-  })
-)
+export const vote = (id, vote, match) => dispatch => {
+  if (match.parentId) {
+    console.log("comment vote")
+    return API.voteComment(id, vote).then(() => dispatch(fetchComments(match.parentId)))
+  } else {
+    console.log("post vote")
+    return API.votePost(id, vote).then(() => {
+     if (match) {
+        dispatch(fetchPosts(match.params.category));
+      } else {
+        dispatch(fetchPosts())
+      }
+      dispatch(fetchPost(id))
+    })
+  }
+}
