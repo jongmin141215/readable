@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as API from '../utils/api';
 import { fetchPost, fetchComments } from '../actions';
@@ -17,7 +18,8 @@ class PostItemPage extends Component {
     title: "",
     body: "",
     selectedCommentId: "",
-    commentDeleted: false
+    commentDeleted: false,
+    fireRedirect: false
   }
   componentDidMount() {
     this.props.fetchPost(this.props.match.params.id).then(({post}) => this.setState({
@@ -85,6 +87,9 @@ class PostItemPage extends Component {
     this.setState({editModeIsOn: false })
     this.props.fetchPost(this.props.match.params.id)
   }
+  deletePost(postId) {
+    API.deletePost(postId).then(() => this.setState({fireRedirect: true}))
+  }
   renderPost(post) {
     const { editModeIsOn, title, author, body, category } = this.state;
     if (!editModeIsOn) {
@@ -93,6 +98,7 @@ class PostItemPage extends Component {
           <PostItemDetail post={post}/>
           <Vote id={post.id} />
           <button onClick={() => this.setState({editModeIsOn: true})}>Edit Post</button>
+          <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
         </div>
       )
     } else {
@@ -120,6 +126,7 @@ class PostItemPage extends Component {
         <ul>
           {this.renderComments()}
         </ul>
+        {this.state.fireRedirect && <Redirect to="/" />}
       </div>
     );
   }
