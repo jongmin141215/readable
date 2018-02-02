@@ -49,20 +49,22 @@ class PostForm extends Component {
         <label>Category</label>
         <select onChange={event => this.updateCategory(event.target.value)} value={category}
           defaultValue={category}
-          disabled={editMode}>
-          <option>Choose</option>
+          disabled={editMode}
+          required>
+          <option value="">Choose</option>
           <option value="react" >React</option>
           <option value="redux" >Redux</option>
           <option value="udacity" >Udacity</option>
         </select>
         <label>Title</label>
-        <input type="text" value={title} onChange={event => this.updateTitle(event.target.value)} />
+        <input type="text" value={title} onChange={event => this.updateTitle(event.target.value)} required />
         <label>Author</label>
         <input type="text" value={author}
           onChange={event => this.updateAuthor(event.target.value)}
-          disabled={editMode} />
+          disabled={editMode}
+          required />
         <label>Body</label>
-        <textarea value={body} onChange={event => this.updateBody(event.target.value)}></textarea>
+        <textarea value={body} onChange={event => this.updateBody(event.target.value)} required></textarea>
         <button type="submit">{editMode ? "Update Post" : "Save Post"}</button>
         { fireRedirect && <Redirect to="/" />}
       </form>

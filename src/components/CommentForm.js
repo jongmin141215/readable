@@ -39,12 +39,12 @@ class CommentForm extends Component {
 
     return (
       <form onSubmit={(event) => this.handleSubmit(event)}>
-        <p>Body: <input type="text" value={body} onChange={event => this.updateBody(event.target.value)} /></p>
+        <p>Body: <input type="text" value={body} onChange={event => this.updateBody(event.target.value)} required /></p>
         <p>Author:
           <input type="text"
             value={author}
             onChange={event => this.updateAuthor(event.target.value)}
-            disabled={editMode} />
+            disabled={editMode} required />
         </p>
         <button type="submit">{editMode ? "Update Comment" : "Save Comment"}</button>
       </form>
