@@ -3,6 +3,36 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.container {
+  margin: 3% 5%;
+}
+
+.sort {
+  display: flex;
+  justify-content: flex-end;
+}
+.sort-button {
+  padding: 7px 5px;
+  max-width: 100px;
+  margin-right: 5px;
+  border: none;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px #ccc;
+}
+.sort-button:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.sort-button:focus {
+  outline: 0;
+  background-color: #ddd;
+}
+.label {
+  color: #333;
+  align-self: center;
+  margin-right: 10px;
+}
 .inline-block {
   display: inline-block;
 }
@@ -16,23 +46,60 @@ body {
   /* -webkit-padding-start: 0; */
   margin-left: -40px;
 }
+.list-item {
+}
 .list-item-link {
   text-decoration: none;
 }
 .post-list {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   list-style-type: none;
 }
+.header-row > th {
+  padding-top: 20px;
+  padding-bottom: 5px;
+  font-weight: 400;
+  color: #333;
+}
+td {
+  width: 100px;
+}
+.large-cell {
+  background-color: red;
+  width: 800px;
+}
+.large-cell > Link {
+  text-align: left;
+}
+.lg-md-cell {
+  width: 200px;
+  background-color: orange;
+  font-size: 0.7em;
+}
+.medium-cell {
+  background-color: yellow;
+  width: 90px;
+}
+.sm-cell {
+  width: 10px;
+  background-color: #eee;
+}
+
 .post-item-link {
   text-decoration: none;
   display: flex;
   justify-content: space-around;
 }
-.post-item-link span {
 
-}
 .author {
   color: #aaa;
+  font-size: 0.8em;
+}
+.vote-button {
+  border: none;
+  background-color: #00aaee;
+  border-radius: 5px;
+  margin-right: 1px;
   font-size: 0.8em;
 }

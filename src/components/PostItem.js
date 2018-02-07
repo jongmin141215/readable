@@ -9,13 +9,17 @@ const PostItem = (props) => {
     hour: 'numeric', minute: 'numeric', month: 'short', day: 'numeric'
   }
   return (
-    <li key={post.id} className="post-item">
-      <span><Vote id={post.id} match={props.match}/></span>
-      <Link to={"/posts/" + post.id} className="post-item-link">
-      <span>{post.category}</span><span>{post.title}</span><span>{post.commentCount}</span><span>{post.voteScore}</span>
-      <span>{formatDate(post.timestamp)}</span>
-      </Link>
-    </li>
+    <tr className="post-item"  key={post.id}>
+      <td><Vote id={post.id} match={props.match}/></td>
+      <td className="medium-cell">{post.category}</td>
+      <td className="large-cell"><Link to={"/posts/" + post.id} className="post-item-link">
+
+      <span>{post.title}</span>
+        </Link></td>
+      <td className="sm-cell">{post.commentCount}</td>
+      <td className="sm-cell">{post.voteScore}</td>
+      <td className="lg-md-cell">{formatDate(post.timestamp)}</td>
+    </tr>
   );
 }
 

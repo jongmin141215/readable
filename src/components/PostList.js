@@ -22,11 +22,19 @@ class PostList extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
         <Sort />
-        <ul className="post-list">
+        <table className="post-list">
+          <tr className="header-row">
+            <th></th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Comment</th>
+            <th>Likes</th>
+            <th>Date</th>
+          </tr>
           {this.renderPosts()}
-        </ul>
+        </table>
       </div>
     );
   }

@@ -7,7 +7,7 @@ import PostList from './PostList';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Link to="/posts/new">Create Post</Link>
         <h1>Categories</h1>
           <CategoryList />

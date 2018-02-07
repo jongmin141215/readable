@@ -8,12 +8,12 @@ class Sort extends Component {
   }
   render() {
     return (
-      <div>
-        Sort By
-        <button onClick={() => this.sort("voteScore", "desc")}>Vote Score (High to Low)</button>
-        <button onClick={() => this.sort("voteScore", "asc")}>Vote Score (Low to High)</button>
-        <button onClick={() => this.sort("timestamp", "desc")}>Time (New to Old)</button>
-        <button onClick={() => this.sort("timestamp", "asc")}>Time (Old to New)</button>
+      <div className="sort">
+        <span className="label">Sort By:</span>
+        <button className="sort-button" onClick={() => this.sort("voteScore", "desc")}>Vote Score (High to Low)</button>
+        <button className="sort-button" onClick={() => this.sort("voteScore", "asc")}>Vote Score (Low to High)</button>
+        <button className="sort-button" onClick={() => this.sort("timestamp", "desc")}>Time (New to Old)</button>
+        <button className="sort-button" onClick={() => this.sort("timestamp", "asc")}>Time (Old to New)</button>
       </div>
     );
   }

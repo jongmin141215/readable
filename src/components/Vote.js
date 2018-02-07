@@ -13,8 +13,8 @@ class Vote extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.vote("upVote")}>Upvote</button>
-        <button onClick={() => this.vote("downVote")}>Downvote</button>
+        <button className="vote-button" onClick={() => this.vote("upVote")}>👍🏼</button>
+        <button className="vote-button" onClick={() => this.vote("downVote")}>👎🏼</button>
       </div>
     );
   }
