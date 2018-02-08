@@ -61,6 +61,8 @@ class PostItemPage extends Component {
 
     if (comments) {
       return comments.map(comment => {
+        console.log("COMMENT", comment)
+        console.log("SELECTED COMMENT ID", selectedCommentId)
         return (
           <li key={comment.id}>
             {(selectedCommentId === "" || selectedCommentId !== comment.id) &&
@@ -72,7 +74,8 @@ class PostItemPage extends Component {
                 body={comment.body}
                 commentId={comment.id}
                 author={comment.author}
-                updateComment={() => this.updateComment()} />
+                updateComment={() => this.updateComment()}
+                handleCancel={() => this.setState({commentEditModeIsOn: false, selectedCommentId: ""})}/>
             }
           </li>
         )
@@ -110,7 +113,9 @@ class PostItemPage extends Component {
             body={body}
             category={category}
             postId={post.id}
-            handleSubmit ={() => this.handleSubmit()} />
+            handleSubmit = {() => this.handleSubmit()}
+            handleCancel = {() => this.setState({editModeIsOn: false})}
+            className="post-form"/>
         </div>
       )
     }
@@ -120,9 +125,22 @@ class PostItemPage extends Component {
     const { post } = this.props
     return (
       <div>
+        <button type="button" onClick={() => {
+          return (
+            <div>
+              {this.setState({fireRedirect: true})}
+              <Redirect to="/" />
+            </div>
+          )
+
+
+        }}>Back</button>
         {this.renderPost(post)}
         <button onClick={() => this.setState({commentFormIsOpen: true})}>Add Comment</button>
-        {this.state.commentFormIsOpen && <CommentForm postId={this.props.match.params.id} handleCommentSubmit={() => this.handleCommentSubmit()} />}
+        {this.state.commentFormIsOpen &&
+          <CommentForm postId={this.props.match.params.id}
+            handleCommentSubmit={() => this.handleCommentSubmit()}
+            closeCommentForm={() => this.setState({commentFormIsOpen: false})} />}
         <ul>
           {this.renderComments()}
         </ul>

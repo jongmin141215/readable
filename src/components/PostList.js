@@ -25,15 +25,17 @@ class PostList extends Component {
       <div className="container">
         <Sort />
         <table className="post-list">
-          <tr className="header-row">
-            <th></th>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Comment</th>
-            <th>Likes</th>
-            <th>Date</th>
-          </tr>
-          {this.renderPosts()}
+          <tbody>
+            <tr className="header-row">
+              <th></th>
+              <th>Category</th>
+              <th>Title</th>
+              <th>Comment</th>
+              <th>Likes</th>
+              <th>Date</th>
+            </tr>
+            {this.renderPosts()}
+          </tbody>
         </table>
       </div>
     );

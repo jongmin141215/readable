@@ -103,3 +103,9 @@ td {
   margin-right: 1px;
   font-size: 0.8em;
 }
+.update-button {
+  display: inline-block;
+}
+.cancel-button {
+  display: inline-block;
+}

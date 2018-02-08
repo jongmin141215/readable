@@ -33,6 +33,14 @@ class CommentForm extends Component {
       handleCommentSubmit()
     }
   }
+  handleCancel() {
+    if (this.props.mode === "Edit") {
+      console.log(this.props);
+      this.props.handleCancel();
+    } else {
+      this.props.closeCommentForm();
+    }
+  }
   render() {
     const { body, author } = this.state;
     const editMode = this.props.mode === "Edit" ? true : false;
@@ -47,6 +55,7 @@ class CommentForm extends Component {
             disabled={editMode} required />
         </p>
         <button type="submit">{editMode ? "Update Comment" : "Save Comment"}</button>
+        <button type="button" onClick={() => this.handleCancel()}>Cancel</button>
       </form>
     );
   }

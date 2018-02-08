@@ -40,6 +40,13 @@ class PostForm extends Component {
       this.setState({ fireRedirect: true })
     }
   }
+  handleCancel() {
+    if (this.props.mode === "Edit") {
+      this.props.handleCancel();
+    } else {
+      this.setState({fireRedirect: true});
+    }
+  }
   render() {
     const { category, title, author, body, fireRedirect } = this.state;
     const editMode = this.props.mode === "Edit" ? true : false;
@@ -65,8 +72,10 @@ class PostForm extends Component {
           required />
         <label>Body</label>
         <textarea value={body} onChange={event => this.updateBody(event.target.value)} required></textarea>
-        <button type="submit">{editMode ? "Update Post" : "Save Post"}</button>
-        { fireRedirect && <Redirect to="/" />}
+        <button type="submit" className="update-button">{editMode ? "Update Post" : "Save Post"}</button>
+        { fireRedirect == true && <Redirect to="/" />}
+        <button type="button" onClick={() => this.handleCancel()}
+          className="cancel-button">Cancel</button>
       </form>
     );
   }
