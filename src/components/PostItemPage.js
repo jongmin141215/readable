@@ -129,7 +129,6 @@ class PostItemPage extends Component {
           return (
             <div>
               {this.setState({fireRedirect: true})}
-              <Redirect to="/" />
             </div>
           )
 

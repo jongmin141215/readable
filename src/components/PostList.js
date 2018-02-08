@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions';
 import PostItem from './PostItem';
 import Sort from './Sort';
@@ -23,6 +24,7 @@ class PostList extends Component {
   render() {
     return (
       <div className="container">
+        {this.props.match && <button><Link to="/">Back</Link></button>}
         <Sort />
         <table className="post-list">
           <tbody>
