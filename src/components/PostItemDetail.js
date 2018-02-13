@@ -6,16 +6,15 @@ class PostItemDetail extends Component {
     console.log("TIMESTAMP TIMESTAMP", this.props.post)
     const { post } = this.props;
     return (
-      <div>
-        <div>
-          <div className="inline-block post-margin">{post.category}</div>
-          <div className="inline-block post-margin">{post.title}</div>
-          <div className="inline-block post-margin">{post.voteScore}</div>
-        </div>
-        <div className="post-margin">{post.author}</div>
-        <div>{post.timestamp && formatDate(post.timestamp)}</div>
-        <div className="post-margin">{post.body}</div>
-      </div>
+
+      <table className="post">
+        <tbody>
+          <tr><td>{post.category}</td><td className="large-cell">{post.title}</td><td>{post.voteScore}<span className="small">votes</span></td></tr>
+          <tr><td></td><td className="small">{post.author} at {post.timestamp && formatDate(post.timestamp)}</td><td></td></tr>
+          <tr><td></td><td className="large-cell body">{post.body}</td><td></td></tr>
+        </tbody>
+      </table>
+
     );
   }
 }

@@ -64,7 +64,7 @@ class PostItemPage extends Component {
         console.log("COMMENT", comment)
         console.log("SELECTED COMMENT ID", selectedCommentId)
         return (
-          <li key={comment.id}>
+          <li key={comment.id} className="comment-item">
             {(selectedCommentId === "" || selectedCommentId !== comment.id) &&
               <CommentItem comment={comment}
                 editComment={() => this.editComment(comment)}
@@ -97,16 +97,18 @@ class PostItemPage extends Component {
     const { editModeIsOn, title, author, body, category } = this.state;
     if (!editModeIsOn) {
       return (
-        <div>
+        <div className="post-detail">
           <PostItemDetail post={post}/>
-          <Vote id={post.id} />
-          <button onClick={() => this.setState({editModeIsOn: true})}>Edit Post</button>
-          <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
+          <div className="buttons">
+            <Vote id={post.id} />
+            <button onClick={() => this.setState({editModeIsOn: true})}>Edit Post</button>
+            <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
+          </div>
         </div>
       )
     } else {
       return (
-        <div>
+        <div className="post-detail">
           <PostForm mode="Edit"
             title={title}
             author={author}
@@ -124,25 +126,23 @@ class PostItemPage extends Component {
   render() {
     const { post } = this.props
     return (
-      <div>
-        <button type="button" onClick={() => {
-          return (
-            <div>
-              {this.setState({fireRedirect: true})}
+      <div className="container">
+        <button type="button" onClick={() => this.setState({fireRedirect: true})}>Back</button>
+        <div className="post-container">
+          <div className="post-sub-container">
+            {this.renderPost(post)}
+            <div className="comment">
+              <button onClick={() => this.setState({commentFormIsOpen: true})}>Add Comment</button>
+              {this.state.commentFormIsOpen &&
+                <CommentForm postId={this.props.match.params.id}
+                  handleCommentSubmit={() => this.handleCommentSubmit()}
+                  closeCommentForm={() => this.setState({commentFormIsOpen: false})} />}
+              <ul>
+                {this.renderComments()}
+              </ul>
             </div>
-          )
-
-
-        }}>Back</button>
-        {this.renderPost(post)}
-        <button onClick={() => this.setState({commentFormIsOpen: true})}>Add Comment</button>
-        {this.state.commentFormIsOpen &&
-          <CommentForm postId={this.props.match.params.id}
-            handleCommentSubmit={() => this.handleCommentSubmit()}
-            closeCommentForm={() => this.setState({commentFormIsOpen: false})} />}
-        <ul>
-          {this.renderComments()}
-        </ul>
+          </div>
+        </div>
         {this.state.fireRedirect && <Redirect to="/" />}
       </div>
     );

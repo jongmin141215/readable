@@ -12,7 +12,7 @@ class Vote extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="vote">
         <button className="vote-button" onClick={() => this.vote("upVote")}>👍🏼</button>
         <button className="vote-button" onClick={() => this.vote("downVote")}>👎🏼</button>
       </div>

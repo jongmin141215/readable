@@ -9,12 +9,17 @@ class CommentItem extends Component {
   render() {
     const { comment, editComment } = this.props;
     return (
-      <div>
-        <span>{comment.body}</span>
-        <span className="author">{comment.author}</span>
-        <span>{formatDate(comment.timestamp)}</span>
-        <span style={{"color": "red"}}>{comment.voteScore}</span>
-        <Vote id={comment.id} match={this.props.comment}/>
+      <div className="comment-container">
+        <table className="comment-table">
+          <tbody>
+            <tr>
+              <td className="comment-body">{comment.body}</td>
+              <td>{comment.voteScore}<span className="small">votes</span></td>
+            </tr>
+            <tr><td className="small">{comment.author} at {formatDate(comment.timestamp)}</td></tr>
+            <tr><td><Vote id={comment.id} match={this.props.comment}/></td></tr>
+          </tbody>
+        </table>
         <button onClick={() => editComment()}>Edit Comment</button>
         <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
       </div>
