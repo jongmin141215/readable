@@ -169,3 +169,17 @@ td {
   border-radius: 10px;
   box-shadow: 1px 1px 1px #aaa;
 }
+.post-form th{
+  padding: 5px;
+}
+.post-form input, textarea {
+  /* background-color: yellow; */
+  width: 300%;
+  height: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+.post-form input:focus, textarea:focus {
+  outline: 0;
+  background-color: #eee;
+}
