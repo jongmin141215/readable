@@ -163,23 +163,22 @@ td {
   word-wrap: break-word;
 }
 .comment-container {
-  background-color: #efefef;
+  background-color: #ddd;
   margin: 10px auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #aaa;
 }
-.post-form th{
+.form th{
   padding: 5px;
 }
-.post-form input, textarea {
-  /* background-color: yellow; */
+.form input, textarea {
   width: 300%;
   height: 20px;
   border: 1px solid #eee;
   border-radius: 5px;
 }
-.post-form input:focus, textarea:focus {
+.form input:focus, textarea:focus {
   outline: 0;
   background-color: #eee;
 }

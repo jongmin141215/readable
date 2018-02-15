@@ -46,14 +46,26 @@ class CommentForm extends Component {
     const editMode = this.props.mode === "Edit" ? true : false;
 
     return (
-      <form onSubmit={(event) => this.handleSubmit(event)}>
-        <p>Body: <input type="text" value={body} onChange={event => this.updateBody(event.target.value)} required /></p>
-        <p>Author:
-          <input type="text"
-            value={author}
-            onChange={event => this.updateAuthor(event.target.value)}
-            disabled={editMode} required />
-        </p>
+      <form onSubmit={(event) => this.handleSubmit(event)} className="comment-container">
+        <table className="form">
+          <tbody>
+            <tr>
+              <th>Body</th>
+              <td>
+                <input type="text" value={body} onChange={event => this.updateBody(event.target.value)} required />
+              </td>
+            </tr>
+            <tr>
+              <th>Author</th>
+              <td>
+                <input type="text"
+                  value={author}
+                  onChange={event => this.updateAuthor(event.target.value)}
+                  disabled={editMode} required />
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <button type="submit">{editMode ? "Update Comment" : "Save Comment"}</button>
         <button type="button" onClick={() => this.handleCancel()}>Cancel</button>
       </form>

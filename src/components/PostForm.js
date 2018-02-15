@@ -53,7 +53,7 @@ class PostForm extends Component {
 
     return(
       <form onSubmit={(event) => this.handleSubmit(event)} className="post container">
-        <table className="post-form">
+        <table className="form">
           <tbody>
             <tr>
               <th>Category</th>
