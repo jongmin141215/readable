@@ -206,3 +206,6 @@ td {
   outline: 0;
   background-color: #eee;
 }
+.no-posts {
+  text-align: center;
+}

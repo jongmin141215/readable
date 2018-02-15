@@ -21,24 +21,36 @@ class PostList extends Component {
       })
     }
   }
+  renderPage() {
+    if (this.props.posts.length !== 0) {
+      return (
+        <div>
+          <Sort />
+          <table className="post-list">
+            <tbody>
+              <tr className="header-row">
+                <th></th>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Comment</th>
+                <th>Likes</th>
+                <th>Date</th>
+              </tr>
+              {this.renderPosts()}
+            </tbody>
+          </table>
+        </div>
+      )
+    } else {
+      return <h2 className="no-posts">There are no posts in this category.</h2>
+    }
+  }
   render() {
+    console.log(this.props.posts)
     return (
       <div className="container">
         {this.props.match && <button><Link to="/">Back</Link></button>}
-        <Sort />
-        <table className="post-list">
-          <tbody>
-            <tr className="header-row">
-              <th></th>
-              <th>Category</th>
-              <th>Title</th>
-              <th>Comment</th>
-              <th>Likes</th>
-              <th>Date</th>
-            </tr>
-            {this.renderPosts()}
-          </tbody>
-        </table>
+        {this.renderPage()}
       </div>
     );
   }

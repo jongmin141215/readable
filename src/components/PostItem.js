@@ -9,7 +9,7 @@ const PostItem = (props) => {
     hour: 'numeric', minute: 'numeric', month: 'short', day: 'numeric'
   }
   return (
-    <tr className="post-item"  key={post.id}>
+    <tr className="post-item" key={post.id}>
       <td><Vote id={post.id} match={props.match}/></td>
       <td className="medium-cell">{capitalize(post.category)}</td>
       <td className="large-cell"><Link to={"/posts/" + post.id} className="post-item-link">
