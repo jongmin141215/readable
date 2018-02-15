@@ -13,7 +13,7 @@ class CategoryList extends Component {
       return categories.map(category => {
         return (
           <li key={category.name} className="list-item">
-            <Link className="list-item-link" to={category.name + "/posts"}>{category.name}</Link>
+            <Link className="list-item-link" to={category.name + "/posts"}>{category.name.toUpperCase()}</Link>
           </li>
         )
       })

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Vote from './Vote';
-import { formatDate } from '../utils/helpers';
+import { formatDate, capitalize } from '../utils/helpers';
 
 const PostItem = (props) => {
   const { post } = props;
@@ -11,7 +11,7 @@ const PostItem = (props) => {
   return (
     <tr className="post-item"  key={post.id}>
       <td><Vote id={post.id} match={props.match}/></td>
-      <td className="medium-cell">{post.category}</td>
+      <td className="medium-cell">{capitalize(post.category)}</td>
       <td className="large-cell"><Link to={"/posts/" + post.id} className="post-item-link">
 
       <span>{post.title}</span>
