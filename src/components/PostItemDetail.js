@@ -3,7 +3,6 @@ import { formatDate, capitalize } from '../utils/helpers';
 
 class PostItemDetail extends Component {
   render() {
-    console.log("TIMESTAMP TIMESTAMP", this.props.post)
     const { post } = this.props;
     return (
       <table className="post">

@@ -6,23 +6,26 @@ export const getCategories = () => {
     .then(res => res.json())
     .then(({ categories }) => categories)
 }
+
 export const getAllPosts = () => (
   fetch(`${apiUrl}/posts`, { headers })
     .then(res => res.json())
     .then(posts => posts)
 )
+
 export const getPostsByCategory = (category) => (
   fetch(`${apiUrl}/${category}/posts`, { headers })
     .then(res => res.json())
     .then(posts => posts)
 )
+
 export const getPost = (id) => {
   return fetch(`${apiUrl}/posts/${id}`, { headers })
     .then(res => res.json())
     .then(post => post)
 }
+
 export const addPost = (post) => {
-  console.log("JSON.stringify(post)", JSON.stringify(post))
   fetch(`${apiUrl}/posts`, {
     method: 'POST',
     headers: {
@@ -30,15 +33,15 @@ export const addPost = (post) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(post)
-  }).then(res => {
-    console.log("res", res)
-    res.json()})
+  }).then(res => res.json())
 }
+
 export const getComments = (postId) => {
   return fetch(`${apiUrl}/posts/${postId}/comments`, { headers })
     .then(res => res.json())
     .then(comments => comments)
 }
+
 export const addComment = (comment) => {
   fetch(`${apiUrl}/comments`, {
     method: 'POST',
@@ -48,12 +51,9 @@ export const addComment = (comment) => {
     },
     body: JSON.stringify(comment)
   })
-    .then(res =>{
-      console.log("comment body", JSON.stringify(comment))
-      console.log("add comment response", res);
-      res.json()
-    })
+    .then(res => res.json())
 }
+
 export const updatePost = (postId, post) => {
   return fetch(`${apiUrl}/posts/${postId}`, {
     method: 'PUT',
@@ -63,11 +63,9 @@ export const updatePost = (postId, post) => {
     },
     body: JSON.stringify(post)
   })
-    .then(res => {
-      console.log("UPDATE POST", JSON.stringify(post))
-      res.json()
-    })
+    .then(res => res.json())
 }
+
 export const updateComment = (commentId, comment) => {
   return fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'PUT',
@@ -79,18 +77,21 @@ export const updateComment = (commentId, comment) => {
   })
     .then(res => res.json())
 }
+
 export const deletePost = (postId) => {
   return fetch(`${apiUrl}/posts/${postId}`, {
     method: 'DELETE',
     headers
   })
 }
+
 export const deleteComment = (commentId) => {
   return fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'DELETE',
     headers
   })
 }
+
 export const votePost = (postId, vote) => {
   return fetch(`${apiUrl}/posts/${postId}`, {
     method: 'POST',
@@ -100,10 +101,8 @@ export const votePost = (postId, vote) => {
     },
     body: JSON.stringify(vote)
   })
-    .then(res => {
-      console.log("res", res)
-    })
 }
+
 export const voteComment = (commentId, vote) => {
   return fetch(`${apiUrl}/comments/${commentId}`, {
     method: 'POST',
@@ -113,7 +112,4 @@ export const voteComment = (commentId, vote) => {
     },
     body: JSON.stringify(vote)
   })
-    .then(res => {
-      console.log("res", res)
-    })
 }

@@ -49,7 +49,6 @@ class PostItemPage extends Component {
     )
   }
   deleteComment(commentId) {
-    console.log("STATE", this.state)
     API.deleteComment(commentId).then(() => {
       this.props.fetchComments(this.props.match.params.id)
       this.setState({commentDeleted: true})
@@ -61,8 +60,6 @@ class PostItemPage extends Component {
 
     if (comments) {
       return comments.map(comment => {
-        console.log("COMMENT", comment)
-        console.log("SELECTED COMMENT ID", selectedCommentId)
         return (
           <li key={comment.id} className="comment-item">
             {(selectedCommentId === "" || selectedCommentId !== comment.id) &&

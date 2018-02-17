@@ -35,7 +35,6 @@ class CommentForm extends Component {
   }
   handleCancel() {
     if (this.props.mode === "Edit") {
-      console.log(this.props);
       this.props.handleCancel();
     } else {
       this.props.closeCommentForm();

@@ -151,14 +151,12 @@ td {
   width: 1000px;
 }
 .post td.post-category {
-  background-color: yellow;
   table-layout: fixed;
   width: 8%;
 }
 .post-detail .post-large {
   table-layout: fixed;
   width: 55%;
-  background-color: red;
 }
 .post-detail {
   width: 70%;

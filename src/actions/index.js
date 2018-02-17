@@ -1,7 +1,6 @@
 import * as API from '../utils/api';
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
-export const SELECT_POST = "SELECT_POST";
 export const RECEIVE_POST = "RECEIVE_POST";
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
@@ -21,13 +20,6 @@ export const receivePosts = posts => ({
   posts
 });
 
-export const selectPost = (selectedPost) => {
-  return {
-    type: SELECT_POST,
-    selectedPost
-  }
-}
-
 export const fetchPost = (id) => dispatch => (
   API.getPost(id).then(post => dispatch(receivePost(post)))
 );
@@ -40,12 +32,14 @@ export const receivePost = post => ({
 export const fetchCategories = () => dispatch => {
   API.getCategories().then(categories => dispatch(receiveCategories(categories)))
 }
+
 export const receiveCategories = categories => {
   return {
     type: RECEIVE_CATEGORIES,
     categories
   }
 }
+
 export const fetchComments = (postId) => dispatch => (
   API.getComments(postId).then(comments => dispatch(receiveComments(comments)))
 )
@@ -56,12 +50,11 @@ export const receiveComments = comments => {
     comments
   }
 }
+
 export const vote = (id, vote, match) => dispatch => {
   if (match && match.parentId) {
-    console.log("comment vote")
     return API.voteComment(id, vote).then(() => dispatch(fetchComments(match.parentId)))
   } else {
-    console.log("post vote")
     return API.votePost(id, vote).then(() => {
      if (match) {
         dispatch(fetchPosts(match.params.category));
@@ -72,6 +65,7 @@ export const vote = (id, vote, match) => dispatch => {
     })
   }
 }
+
 export const sort = (sortBy, order) => {
   return {
     type: SORT,

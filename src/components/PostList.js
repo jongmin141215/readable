@@ -46,7 +46,6 @@ class PostList extends Component {
     }
   }
   render() {
-    console.log(this.props.posts)
     return (
       <div className="container">
         {this.props.match && <button><Link to="/">Back</Link></button>}
