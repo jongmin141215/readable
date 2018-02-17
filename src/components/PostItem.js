@@ -5,9 +5,6 @@ import { formatDate, capitalize } from '../utils/helpers';
 
 const PostItem = (props) => {
   const { post } = props;
-  let options = {
-    hour: 'numeric', minute: 'numeric', month: 'short', day: 'numeric'
-  }
   return (
     <tr className="post-item" key={post.id}>
       <td><Vote id={post.id} match={props.match}/></td>

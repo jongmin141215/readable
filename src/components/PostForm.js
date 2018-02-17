@@ -95,7 +95,7 @@ class PostForm extends Component {
           </tbody>
         </table>
         <button type="submit" className="update-button">{editMode ? "Update Post" : "Save Post"}</button>
-        { fireRedirect == true && <Redirect to="/" />}
+        { fireRedirect === true && <Redirect to="/" />}
         <button type="button" onClick={() => this.handleCancel()}
           className="cancel-button">Cancel</button>
       </form>

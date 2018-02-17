@@ -56,7 +56,7 @@ class PostItemPage extends Component {
   }
   renderComments() {
     const { comments } = this.props;
-    const { selectedCommentId, commentEditModeIsOn, commentBody } = this.state;
+    const { selectedCommentId, commentEditModeIsOn } = this.state;
 
     if (comments) {
       return comments.map(comment => {
