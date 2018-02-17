@@ -8,9 +8,9 @@ class PostItemDetail extends Component {
     return (
       <table className="post">
         <tbody>
-          <tr><td>{post.category && capitalize(post.category)}</td><td className="large-cell">{post.title}</td><td>{post.voteScore}<span className="small">votes</span></td></tr>
+          <tr><td className="post-category">{post.category && capitalize(post.category)}</td><td className="post-large">{post.title}</td><td>{post.voteScore}<span className="small">votes</span></td></tr>
           <tr><td></td><td className="small">{post.author} at {post.timestamp && formatDate(post.timestamp)}</td><td></td></tr>
-          <tr><td></td><td className="large-cell body">{post.body}</td><td></td></tr>
+          <tr><td></td><td className="post-large body">{post.body}</td><td></td></tr>
         </tbody>
       </table>
 
