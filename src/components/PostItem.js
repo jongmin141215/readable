@@ -9,10 +9,11 @@ const PostItem = (props) => {
     <tr className="post-item" key={post.id}>
       <td><Vote id={post.id} match={props.match}/></td>
       <td className="medium-cell">{capitalize(post.category)}</td>
-      <td className="large-cell"><Link to={"/posts/" + post.id} className="post-item-link">
-
-      <span>{post.title}</span>
+      <td className="large-cell">
+        <Link to={"/posts/" + post.id} className="post-item-link">
+          <span>{post.title}</span>
         </Link></td>
+      <td>{post.author}</td>
       <td className="sm-cell">{post.commentCount}</td>
       <td className="sm-cell">{post.voteScore}</td>
       <td className="lg-md-cell">{formatDate(post.timestamp)}</td>

@@ -32,6 +32,7 @@ class PostList extends Component {
                 <th></th>
                 <th>Category</th>
                 <th>Title</th>
+                <th>Author</th>
                 <th>Comment</th>
                 <th>Likes</th>
                 <th>Date</th>
