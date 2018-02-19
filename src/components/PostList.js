@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions';
 import PostItem from './PostItem';
 import Sort from './Sort';
+import * as API from '../utils/api';
 
 class PostList extends Component {
+  state = {
+    refreshPage: false
+  }
   componentDidMount() {
     if (this.props.match) {
       this.props.fetchPosts(this.props.match.params.category)
@@ -17,9 +21,20 @@ class PostList extends Component {
     const { posts } = this.props;
     if (posts) {
       return posts.map(post => {
-        return <PostItem post={post} key={post.id} match={this.props.match} />;
+        return (
+          <PostItem post={post}
+            key={post.id} match={this.props.match}
+            editPost={(postId) => this.editPost(postId)}
+            deletePost={(postId) => this.deletePost(postId)} />
+        );
       })
     }
+  }
+  editPost(postId) {
+    alert(postId)
+  }
+  deletePost(postId) {
+    API.deletePost(postId).then(() => this.props.fetchPosts())
   }
   renderPage() {
     if (this.props.posts.length !== 0) {
@@ -36,6 +51,7 @@ class PostList extends Component {
                 <th>Comment</th>
                 <th>Likes</th>
                 <th>Date</th>
+                <th>Manage</th>
               </tr>
               {this.renderPosts()}
             </tbody>

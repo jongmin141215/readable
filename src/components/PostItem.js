@@ -17,6 +17,10 @@ const PostItem = (props) => {
       <td className="sm-cell">{post.commentCount}</td>
       <td className="sm-cell">{post.voteScore}</td>
       <td className="lg-md-cell">{formatDate(post.timestamp)}</td>
+      <td style={{width: "132px", textAlign: "center"}}>
+        <button onClick={() => props.editPost(post.id)}>Edit</button>
+        <button onClick={() => props.deletePost(post.id)}>Delete</button>
+      </td>
     </tr>
   );
 }
