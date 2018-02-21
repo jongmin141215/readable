@@ -91,8 +91,12 @@ class PostItemPage extends Component {
     }
   }
   handleCommentSubmit() {
-    this.setState({ commentFormIsOpen: false });
-    this.props.fetchComments(this.props.match.params.id)
+    this.props.fetchComments(this.props.match.params.id).then(
+      () => {
+        this.setState({ commentFormIsOpen: false })
+        this.props.fetchPost(this.props.match.params.id)
+      }
+    )
   }
   handleSubmit(event) {
     this.setState({editModeIsOn: false })
@@ -132,7 +136,6 @@ class PostItemPage extends Component {
 
   }
   render() {
-    console.log("STATE", this.state)
     const { post } = this.props
     return (
       <div className="container">

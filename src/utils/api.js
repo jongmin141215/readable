@@ -43,7 +43,7 @@ export const getComments = (postId) => {
 }
 
 export const addComment = (comment) => {
-  fetch(`${apiUrl}/comments`, {
+  return fetch(`${apiUrl}/comments`, {
     method: 'POST',
     headers: {
       ...headers,

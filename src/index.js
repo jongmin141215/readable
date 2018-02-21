@@ -14,7 +14,6 @@ import NotFound from './components/NotFound';
 import rootReducer from './reducers';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-console.log("store", store)
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
