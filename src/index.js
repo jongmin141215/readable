@@ -21,7 +21,7 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/posts/new" component={PostForm} />
-          <Route path="/posts/:id" component={PostItemPage} />
+          <Route path="/:category/:id" component={PostItemPage} />
           <Route path="/:category" component={PostList} />
 
           <Route path="/" component={App} />

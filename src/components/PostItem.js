@@ -10,7 +10,7 @@ const PostItem = (props) => {
       <td><Vote id={post.id} match={props.match}/></td>
       <td className="medium-cell">{capitalize(post.category)}</td>
       <td className="large-cell">
-        <Link to={"/posts/" + post.id} className="post-item-link">
+        <Link to={post.category + "/" + post.id} className="post-item-link">
           <span>{post.title}</span>
         </Link></td>
       <td>{post.author}</td>
