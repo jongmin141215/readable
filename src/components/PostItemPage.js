@@ -29,6 +29,10 @@ class PostItemPage extends Component {
         category: post.category
       }))
     this.props.fetchComments(this.props.match.params.id)
+    if (this.props.location.state) {
+      this.setState({editModeIsOn: true})
+      this.renderPost(this.props.location.state.selectedPost)
+    }
   }
   updateTitle(title) {
     this.setState({ title })
@@ -106,7 +110,7 @@ class PostItemPage extends Component {
     } else {
       return (
         <div className="post-detail">
-          <PostForm mode="Edit"
+          {title && author && body && category && <PostForm mode="Edit"
             title={title}
             author={author}
             body={body}
@@ -114,7 +118,7 @@ class PostItemPage extends Component {
             postId={post.id}
             handleSubmit = {() => this.handleSubmit()}
             handleCancel = {() => this.setState({editModeIsOn: false})}
-            className="post-form"/>
+            className="post-form"/>}
         </div>
       )
     }
