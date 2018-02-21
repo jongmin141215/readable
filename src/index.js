@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 import PostItemPage from './components/PostItemPage';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
-
+import NotFound from './components/NotFound';
 import rootReducer from './reducers';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -22,8 +22,8 @@ ReactDOM.render(
         <Switch>
           <Route path="/posts/new" component={PostForm} />
           <Route path="/:category/:id" component={PostItemPage} />
+          <Route path="/notFound" component={NotFound} />
           <Route path="/:category" component={PostList} />
-
           <Route path="/" component={App} />
         </Switch>
       </div>

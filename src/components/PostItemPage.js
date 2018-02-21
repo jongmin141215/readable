@@ -15,19 +15,26 @@ class PostItemPage extends Component {
     commentFormIsOpen: false,
     editModeIsOn: false,
     commentEditModeIsOn: false,
+    postDeleted: false,
     title: "",
     body: "",
     selectedCommentId: "",
     commentDeleted: false,
-    fireRedirect: false
+    fireRedirect: false,
   }
   componentDidMount() {
-    this.props.fetchPost(this.props.match.params.id).then(({post}) => this.setState({
-        title: post.title,
-        author: post.author,
-        body: post.body,
-        category: post.category
-      }))
+    this.props.fetchPost(this.props.match.params.id).then(({post}) => {
+      if (Object.keys(post).length === 0 && post.constructor === Object) {
+        this.setState({postDeleted: true})
+      } else {
+        this.setState({
+            title: post.title,
+            author: post.author,
+            body: post.body,
+            category: post.category
+        })
+      }
+    })
     this.props.fetchComments(this.props.match.params.id)
     if (this.props.location.state) {
       this.setState({editModeIsOn: true})
@@ -125,6 +132,7 @@ class PostItemPage extends Component {
 
   }
   render() {
+    console.log("STATE", this.state)
     const { post } = this.props
     return (
       <div className="container">
@@ -144,6 +152,7 @@ class PostItemPage extends Component {
             </div>
           </div>
         </div>
+        {this.state.postDeleted && <Redirect to="/notFound" />}
         {this.state.fireRedirect && <Redirect to="/" />}
       </div>
     );

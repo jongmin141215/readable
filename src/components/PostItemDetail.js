@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { formatDate, capitalize } from '../utils/helpers';
 
 class PostItemDetail extends Component {
   render() {
-    console.log(this.props)
     const { post } = this.props;
     return (
       <table className="post">
+        {post.error && <Redirect to="/notFound" />}
         <tbody>
           <tr>
             <td className="post-category">{post.category && capitalize(post.category)}</td>

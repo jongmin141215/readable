@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import Vote from './Vote';
 import { formatDate, capitalize } from '../utils/helpers';
 
+const renderLink = (post) => {
+  console.log("hihi", post)
+  if (post.error) {
+    alert("error")
+  }
+}
 const PostItem = (props) => {
   const { post } = props;
   return (
@@ -12,7 +18,9 @@ const PostItem = (props) => {
       <td className="large-cell">
         <Link to={post.category + "/" + post.id} className="post-item-link">
           <span>{post.title}</span>
+          {renderLink(post)}
         </Link></td>
+
       <td>{post.author}</td>
       <td className="sm-cell">{post.commentCount}</td>
       <td className="sm-cell">{post.voteScore}</td>
